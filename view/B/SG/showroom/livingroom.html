@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Room Interior</title>
+    <link rel="stylesheet" href="../../css/default.css">
+    <link rel="stylesheet" href="../../css/theme.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .furniture-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-evenly;
+        }
+
+        .furniture-item {
+            position: relative;
+            width: 250px;
+            cursor: pointer;
+        }
+
+        .furniture-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .furniture-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .popup {
+            display: none;
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 14px;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .furniture-item:hover .popup {
+            display: block;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background-color: #121214;
+            color: white;
+        }
+    </style>
+</head>
+<script src="../../../header.js"></script>
+<body>
+    <header id="header">
+        <div class="container">
+            <h1 class="logo">
+                <a href="../index.html">
+                    <img alt="Island Furniture" width="180" height="80" data-sticky-width="82" data-sticky-height="40" src="../../img/logo.png">
+                </a>
+            </h1>
+            <!-- Non Logged In Menu-->
+            <div id="menuLoggedOut" style="display: none;">
+                <nav>
+                    <ul class="nav nav-pills nav-top">
+                        <li class="storeLocationMenu">
+                            <a href="../storeLocation.html"><i class="icon icon-map-marker"></i>Store Location</a>
+                        </li>
+                        <li>
+                            <a href="../memberLogin.html"><i class="icon icon-unlock-alt"></i>Login/Register</a>
+                        </li>
+                        <li>
+                            <a href="../contactUs.html"><i class="icon icon-shopping-cart"></i>Contact Us</a>
+                        </li>
+                    </ul>
+                    <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
+                        <i class="icon icon-bars"></i>
+                    </button>
+                </nav>
+            </div>
+            <!-- Logged In Menu-->
+            <div id="menuLoggedIn" style="display: none;">
+                <nav>
+                    <ul class="nav nav-pills nav-top">
+                        <li><a id="memberName"></a></li>
+                        <li class="storeLocationMenu">
+                            <a href="../storeLocation.html"><i class="icon icon-map-marker"></i>Store Location</a>
+                        </li>
+                        <li>
+                            <a href="../shoppingCart.html"><i class="icon icon-shopping-cart"></i>Shopping Cart</a>
+                        </li>
+                        <li>
+                            <a href="../memberProfile.html"><i class="icon icon-user"></i>Profile</a>
+                        </li>
+                        <li>
+                            <a href="../contactUs.html"><i class="icon icon-shopping-cart"></i>Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="logout()"><i class="icon icon-unlock-alt"></i>Logout</a>
+                        </li>
+                    </ul>
+                    <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
+                        <i class="icon icon-bars"></i>
+                    </button>
+                </nav>
+            </div>
+        </div>
+        <div class="navbar-collapse nav-main-collapse collapse">
+            <div class="container">
+                <nav class="nav-main mega-menu">
+                    <ul class="nav nav-pills nav-main" id="mainMenu">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#">Showroom <i class="icon icon-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="./bedroom.html" target="_blank"><i class="icon icon-bed"></i> Bedroom</a></li>
+                                <li><a href="./kitchen.html" target="_blank"><i class="icon icon-cutlery"></i> Kitchen</a></li>
+                                <li><a href="./livingroom.html" target="_blank"><i class="icon icon-sofa"></i> Living Room</a></li>
+                                <li><a href="./toilet.html" target="_blank"><i class="icon icon-bath"></i> Toilet</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../virtualStore.html">Virtual Store</a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#">
+                                All Departments<i class="icon icon-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a id="tableDeskLink"><i class="icon icon-map-marker"></i> Tables & Desk</a></li>
+                                <li><a href="../furnitureCategory.html?cat=Bathroom"><i class="icon icon-map-marker"></i> Bathroom</a></li>
+                                <li><a id="bedMattressLink"><i class="icon icon-map-marker"></i> Beds & Mattresses</a></li>
+                                <li><a id="sofaChairLink"><i class="icon icon-map-marker"></i> Sofas & Chair</a></li>
+                                <li><a id="cabinetStorageLink"><i class="icon icon-map-marker"></i> Cabinets & Storage</a></li>
+                                <li><a href="../furnitureCategory.html?cat=Lightings"><i class="icon icon-map-marker"></i> Lightings</a></li>
+                                <li><a href="../furnitureCategory.html?cat=Study"><i class="icon icon-map-marker"></i> Study</a></li>
+                                <li><a href="../furnitureCategory.html?cat=Children"><i class="icon icon-map-marker"></i> Children</a></li>
+                                <li><a id="retailProductLink"><i class="icon icon-coffee"></i> Retail Products</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <h1>Living Room Interior Designs</h1>
+        <div class="furniture-grid">
+            <div class="furniture-item">
+                <img src="../img/livingroom/sofa.jpg" alt="Modern Sofa">
+                <div class="popup">
+                    <strong>Modern Sofa</strong><br>
+                    Price: $999<br>
+                    Dimensions: 220cm x 90cm x 80cm
+                </div>
+            </div>
+            <div class="furniture-item">
+                <img src="../img/livingroom/coffee-table.jpg" alt="Coffee Table">
+                <div class="popup">
+                    <strong>Coffee Table</strong><br>
+                    Price: $499<br>
+                    Dimensions: 120cm x 60cm x 40cm
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 Island Furniture. All Rights Reserved.
+    </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</html>
