@@ -162,17 +162,17 @@
         <h1>Living Room Interior Designs</h1>
         <div class="furniture-grid">
             <div class="furniture-item">
-                <img src="../img/livingroom/sofa.jpg" alt="Modern Sofa">
-                <div class="popup">
-                    <strong>Modern Sofa</strong><br>
+                <img src="../../../img/livingroomshowroom.jpg" alt="Modern Sofa">
+                <div class="popup"data-url="http://localhost:8081/B/SG/furnitureCategory.html?cat=Sofas%20%26%20Chair">
+                    <strong>Cozy living room</strong><br>
                     Price: $999<br>
                     Dimensions: 220cm x 90cm x 80cm
                 </div>
             </div>
             <div class="furniture-item">
-                <img src="../img/livingroom/coffee-table.jpg" alt="Coffee Table">
-                <div class="popup">
-                    <strong>Coffee Table</strong><br>
+                <img src="../../../img/livingroomshowroom2.jpg" alt="Coffee Table">
+                <div class="popup"data-url="http://localhost:8081/B/SG/furnitureCategory.html?cat=Sofas%20%26%20Chair">
+                    <strong>Minimalistic Living room</strong><br>
                     Price: $499<br>
                     Dimensions: 120cm x 60cm x 40cm
                 </div>
@@ -183,6 +183,39 @@
         &copy; 2024 Island Furniture. All Rights Reserved.
     </footer>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var memberEmail = sessionStorage.getItem("memberEmail");
+        if (memberEmail == null || memberEmail == "") {
+            document.getElementById("menuLoggedOut").style.display = "block";
+            document.getElementById("menuLoggedIn").style.display = "none";
+        } else {
+            document.getElementById("menuLoggedOut").style.display = "none";
+            document.getElementById("menuLoggedIn").style.display = "block";
+            var welcomeText = sessionStorage.getItem("memberName");
+            if (welcomeText == "null") {
+                welcomeText = "";
+            }
+            document.getElementById("memberName").innerHTML = "Welcome " + welcomeText + "!";
+        }
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.furniture-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+            var popup = this.querySelector('.popup');
+            if (popup) {
+                var url = popup.getAttribute('data-url');
+                if (url) {
+                    window.location.href = url;
+                }
+            }
+        });
+    });
+});
+
+</script>
 </html>
