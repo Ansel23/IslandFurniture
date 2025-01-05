@@ -154,7 +154,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a id="tableDeskLink"><i class="icon icon-map-marker"></i> Tables & Desk</a></li>
-                                <li><a href="../furnitureCategory.html?cat=Bathroom"><i class="icon icon-map-marker"></i> Bathroom</a></li>
+                                <li><a href="../../furnitureCategory.html?cat=Bathroom"><i class="icon icon-map-marker"></i> Bathroom</a></li>
                                 <li><a id="bedMattressLink"><i class="icon icon-map-marker"></i> Beds & Mattresses</a></li>
                                 <li><a id="sofaChairLink"><i class="icon icon-map-marker"></i> Sofas & Chair</a></li>
                                 <li><a id="cabinetStorageLink"><i class="icon icon-map-marker"></i> Cabinets & Storage</a></li>
@@ -175,8 +175,8 @@
         <div class="furniture-grid">
             <!-- Furniture Item 1 -->
             <div class="furniture-item">
-                <img src="../img/bedroom/bed.jpg" alt="Modern Bed">
-                <div class="popup">
+                <img src="../../../img/bedroomshowroom.webp" alt="Modern Bed">
+                <div class="popup" data-url="http://localhost:8081/B/SG/furnitureCategory.html?cat=Beds%20%26%20Mattresses">
                     <strong>Modern Bed</strong><br>
                     Price: $599<br>
                     Dimensions: 200cm x 150cm x 40cm
@@ -184,15 +184,16 @@
             </div>
             <!-- Furniture Item 2 -->
             <div class="furniture-item">
-                <img src="../img/bedroom/wardrobe.jpg" alt="Spacious Wardrobe">
-                <div class="popup">
-                    <strong>Spacious Wardrobe</strong><br>
+                <img src="../../../img/bedroomshowroom2.jpg" alt="Spacious Wardrobe">
+                <div class="popup" data-url="http://localhost:8081/B/SG/furnitureCategory.html?cat=Beds%20%26%20Mattresses">
+                    <strong>Spacious low frame bed</strong><br>
                     Price: $799<br>
                     Dimensions: 180cm x 120cm x 60cm
                 </div>
             </div>
             <!-- Add more furniture items here -->
         </div>
+        
     </div>
     <footer>
         &copy; 2024 Island Furniture. All Rights Reserved.
@@ -217,5 +218,21 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.furniture-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+            var popup = this.querySelector('.popup');
+            if (popup) {
+                var url = popup.getAttribute('data-url');
+                if (url) {
+                    window.location.href = url;
+                }
+            }
+        });
+    });
+});
+
+</script>
 
 </html>
