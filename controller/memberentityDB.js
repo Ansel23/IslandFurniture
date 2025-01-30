@@ -215,8 +215,11 @@ app.put('/api/updateMemberPassword', jsonParser, function (req, res) {
     var password = req.body.password;
     member.updateMemPasswordAndResetCode(email,password)
         .then((result) => {
-            res.send(result);
-        })
+            if (result.success) {
+                res.json({ status: "success" }); // Send JSON response
+            } else {
+                res.status(400).json({ status: "failed" });
+            }       })
         .catch((err) => {
             console.log(err);
             res.status(500).send("Failed to update member password");
