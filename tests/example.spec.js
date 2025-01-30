@@ -1,9 +1,9 @@
-const { test, expect } = require('@playwright/test');
+// @ts-check
+import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3001'); // Testing port
-});
-
+// test.beforeEach(async ({ page }) => {
+//   await page.goto('http://localhost:3001/B/selectCountry.html');
+// });
 
 
 test.describe('View Product by Categories', () => {
@@ -17,8 +17,13 @@ test.describe('View Product by Categories', () => {
 
 test.describe('View Product Details', () => {
   test('Should allow me to vie product details', async ({ page }) => {
+    
+  await page.goto('http://localhost:8081/B/selectCountry.html');
+  await page.getByRole('link', { name: 'Singapore' }).click();
+  await page.getByRole('link', { name: 'All Departments ' }).hover();
 
-    // Insert code here
+  await page.getByRole('link', { name: ' Tables & Desk' }).click();
+  await page.getByRole('button', { name: 'More Details' }).click();
 
   });
 });
