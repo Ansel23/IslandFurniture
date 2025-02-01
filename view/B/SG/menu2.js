@@ -103,7 +103,7 @@ document.write('\
                             <a class="dropdown-toggle" href="#">\
                                 All Departments<i class="icon icon-angle-down"></i>\
                             </a>\
-                            <ul class="dropdown-menu">\
+                            <ul class="dropdown-menu cats">\
                                 <li><a id="tableDeskLink"><i class="icon icon-map-marker"></i> Tables & Desk</a></li>\
                                 <li><a href="/B/' + countryPrefix + '/furnitureCategory.html?cat=Bathroom"><i class="icon icon-map-marker"></i> Bathroom</a></li>\
                                 <li><a id="bedMattressLink"><i class="icon icon-map-marker"></i> Beds & Mattresses</a></li>\

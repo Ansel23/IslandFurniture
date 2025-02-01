@@ -7,26 +7,70 @@ import { test, expect } from '@playwright/test';
 
 
 test.describe('View Product by Categories', () => {
-  test('Should allow me view products by category (inclusive of Retail Products)', async ({ page,}) => {
+  test('Should allow me view products by category (inclusive of Retail Products)', async ({ page }) => {
 
-    // Insert code here
+    // Step 1: Navigate to the website
+    await page.goto('http://localhost:8081/B/selectCountry.html');
+
+    // Step 2: Select country (Singapore)
+    await page.getByRole('link', { name: 'Singapore' }).click();
+
+    // Step 3: Hover over categories
+    await page.getByRole('link', { name: 'All Departments ' }).hover();
+
+    // Step 4: Loop over all categories
+    for (const category of await page.locator('.cats li').all()){
+
+      // Step 5: Click on category
+      await category.click();
+
+      // Step 6: Return to all department
+      await page.getByRole('link', { name: 'All Departments ' }).hover();
+    }
 
   });
 });
 
 
 test.describe('View Product Details', () => {
-  test('Should allow me to vie product details', async ({ page }) => {
+  test('Should allow me to view product details', async ({ page }) => {
     
-  await page.goto('http://localhost:8081/B/selectCountry.html');
-  await page.getByRole('link', { name: 'Singapore' }).click();
-  await page.getByRole('link', { name: 'All Departments ' }).hover();
+    // Step 1: Navigate to the website
+    await page.goto('http://localhost:8081/B/selectCountry.html');
 
-  await page.getByRole('link', { name: ' Tables & Desk' }).click();
-  await page.getByRole('button', { name: 'More Details' }).click();
+    // Step 2: Select country (Singapore)
+    await page.getByRole('link', { name: 'Singapore' }).click();
+
+    // Step 3: Hover over categories
+    await page.getByRole('link', { name: 'All Departments ' }).hover();
+
+    // Step 4: Loop over all categories
+    for (const category of await page.locator('.cats li').all()){
+
+      // Step 5: Click on category
+      await category.click();
+
+      // Step 6: Loop over all products
+      for (const button of await page.getByRole('button', { name: 'More Details' }).all()){
+        // Step 7: Click on more details
+        await button.click();
+        
+        // Step 8: Expect to see product details
+        await expect(page.getByRole('main').locator('div').filter({hasText: 'Description Category:'}).nth(2)).toBeVisible();
+        
+        // Step 9: Return to category
+        await page.getByRole('link', { name: 'All Departments ' }).hover();
+        await category.click();
+      }
+
+      // Step 10: Return to all departments
+      await page.getByRole('link', { name: 'All Departments ' }).hover();
+    }
 
   });
 });
+
+
 test.describe('Change Password Flow with Validation Checks', () => {
   
   test('Should change password successfully and prevent empty password input', async ({ page }) => {
