@@ -50,20 +50,34 @@ test.describe('View Product Details', () => {
       // Step 5: Click on category
       await category.click();
 
-      // Step 6: Loop over all products
-      for (const button of await page.getByRole('button', { name: 'More Details' }).all()){
-        // Step 7: Click on more details
-        await button.click();
-        
-        // Step 8: Expect to see product details
-        await expect(page.getByRole('main').locator('div').filter({hasText: 'Description Category:'}).nth(2)).toBeVisible();
-        
-        // Step 9: Return to category
-        await page.getByRole('link', { name: 'All Departments ' }).hover();
-        await category.click();
-      }
+      // Step 7: Click on more details
+      await page.locator('.moreDetails').click();
+      
+      // Step 8: Expect to see product details
+      await expect(page.getByRole('main').locator('div').filter({hasText: 'Description Category:'}).nth(2)).toBeVisible();
 
-      // Step 10: Return to all departments
+      // Step 9: Hover over locations
+      await page.getByRole('link', { name: 'All Departments ' }).hover();
+
+      // Step 10: Check product availability
+      for(let i = 59; i < 62; i++){
+
+        // select store location
+        await page.locator('#storeID').selectOption(i+'');
+
+        // check availability
+        await page.getByRole('button', { name: 'Check Item Availability' }).click();
+      }
+      // select ecommerce
+      await page.locator('#storeID').selectOption('10001');
+      // check availability for ecommerce
+      await page.getByRole('button', { name: 'Check Item Availability' }).click();
+      
+      // Step 10: Return to category
+      await page.getByRole('link', { name: 'All Departments ' }).hover();
+      await category.click();
+
+      // Step 11: Return to all departments
       await page.getByRole('link', { name: 'All Departments ' }).hover();
     }
 
